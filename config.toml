@@ -1,0 +1,49 @@
+[theme]
+theme = "gruvbox-dark"
+
+[icons]
+icons = "awesome6"
+
+[icons.overrides]
+cpu = ""
+cpu_idle = "⚙"
+cpu_warning = "⚡"
+cpu_critical = "🔥"
+memory_idle = "🌿"
+memory_warning = "🍂"
+memory_critical = "💥"
+
+# Time
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/time.sh"
+interval = 10
+json = true
+
+# Now playing (MPRIS)
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/nowplaying.sh"
+interval = 2
+json = true
+
+# Load average
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/load.sh"
+interval = 3
+json = true
+
+# CPU usage
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/cpu.sh"
+interval = 2
+json = true
+
+# Memory usage
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/mem.sh"
+interval = 5
+json = true
