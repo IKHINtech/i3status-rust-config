@@ -29,4 +29,17 @@ if ((${#text} > max)); then
 	text="${text:0:max}…"
 fi
 
-printf '{"icon":"music","state":"%s","text":"%s"}\n' "$state" "$text"
+# hapus newline yang bisa bikin JSON invalid
+text="${text//$'\n'/ }"
+text="${text//$'\r'/ }"
+
+NOW_STATE="$state" NOW_TEXT="$text" python3 - <<'PY'
+import json, os
+
+payload = {
+    "icon": "music",
+    "state": os.environ["NOW_STATE"],
+    "text": os.environ["NOW_TEXT"],
+}
+print(json.dumps(payload))
+PY
