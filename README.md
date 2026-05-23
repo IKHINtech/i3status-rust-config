@@ -14,8 +14,11 @@ Each `[[block]]` uses `json = true` and runs a script inside `scripts/`.
 1. **Time** (`scripts/time.sh`): prints `Tue 27/01 08:07:57` style strings with seconds included.
 2. **Now playing (MPRIS)** (`scripts/nowplaying.sh`): streams the current media via MPRIS (no changes in this repo).
 3. **Load average** (`scripts/load.sh`): reports the system load (existing helper).
-4. **CPU usage** (`scripts/cpu.sh`): samples `/proc/stat`, calculates usage, selects a state icon, and formats a 12-segment bar next to `CPU XX%`.
-5. **Memory usage** (`scripts/mem.sh`): reads `/proc/meminfo`, computes used memory percent, selects the matching icon, and renders a 12-segment bar with `RAM XX%`.
+4. **Disk usage** (`scripts/disk.sh`): reports root filesystem usage and remaining free space.
+5. **Network** (`scripts/network.sh`): shows the active interface, Wi-Fi SSID when available, and IPv4 address.
+6. **Battery / AC** (`scripts/battery.sh`): reports battery percentage and charging state, or `AC` on machines without a battery.
+7. **CPU usage** (`scripts/cpu.sh`): samples `/proc/stat`, calculates usage, selects a state icon, formats a 12-segment bar, and appends CPU package temperature when available.
+8. **Memory usage** (`scripts/mem.sh`): reads `/proc/meminfo`, computes used memory percent, selects the matching icon, and renders a 12-segment bar with `RAM XX%`.
 
 ## Scripts
 

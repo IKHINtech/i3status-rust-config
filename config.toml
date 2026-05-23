@@ -1,5 +1,5 @@
 [theme]
-theme = "gruvbox-dark"
+theme = "slick"
 
 [icons]
 icons = "awesome6"
@@ -9,9 +9,15 @@ cpu = ""
 cpu_idle = "⚙"
 cpu_warning = "⚡"
 cpu_critical = "🔥"
+disk = ""
 memory_idle = "🌿"
 memory_warning = "🍂"
 memory_critical = "💥"
+net_up = "󰖩"
+net_down = "󰖪"
+plug = ""
+bat = ""
+bat_charging = ""
 
 # Time
 [[block]]
@@ -32,6 +38,27 @@ json = true
 block = "custom"
 command = "~/.config/i3status-rust/scripts/load.sh"
 interval = 3
+json = true
+
+# Disk usage
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/disk.sh"
+interval = 30
+json = true
+
+# Network
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/network.sh"
+interval = 5
+json = true
+
+# Battery / AC
+[[block]]
+block = "custom"
+command = "~/.config/i3status-rust/scripts/battery.sh"
+interval = 15
 json = true
 
 # CPU usage

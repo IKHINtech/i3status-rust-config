@@ -28,6 +28,26 @@ read_cpu() {
 	echo "$total $idle_all"
 }
 
+read_cpu_temp() {
+	local zone
+
+	for zone in /sys/class/thermal/thermal_zone*; do
+		[[ -r "$zone/type" && -r "$zone/temp" ]] || continue
+		if [[ $(<"$zone/type") == "x86_pkg_temp" ]]; then
+			printf "%s\n" "$(( $(<"$zone/temp") / 1000 ))"
+			return 0
+		fi
+	done
+
+	for zone in /sys/class/thermal/thermal_zone*; do
+		[[ -r "$zone/temp" ]] || continue
+		printf "%s\n" "$(( $(<"$zone/temp") / 1000 ))"
+		return 0
+	done
+
+	return 1
+}
+
 read -r total1 idle1 < <(read_cpu)
 sleep 0.4
 read -r total2 idle2 < <(read_cpu)
@@ -58,4 +78,9 @@ case "$state" in
 esac
 
 bar=$(build_bar "$usage")
-printf '{"icon":"%s","state":"%s","text":"CPU %s%% %s"}\n' "$icon" "$state" "$usage" "$bar"
+temp_text=""
+if temp=$(read_cpu_temp 2>/dev/null); then
+	temp_text=" ${temp}C"
+fi
+
+printf '{"icon":"%s","state":"%s","text":"CPU %s%% %s%s"}\n' "$icon" "$state" "$usage" "$bar" "$temp_text"
